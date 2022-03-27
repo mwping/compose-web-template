@@ -1,3 +1,5 @@
+import AppStylesheet.issueGroupText
+import AppStylesheet.issueNameText
 import androidx.compose.runtime.*
 import io.ktor.client.*
 import io.ktor.client.request.*
@@ -6,6 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.web.renderComposable
 import io.ktor.client.statement.*
+import org.jetbrains.compose.web.css.Style
 import org.jetbrains.compose.web.dom.*
 
 fun main() {
@@ -23,6 +26,7 @@ suspend fun loadPerfIssues(): List<PerfIssue> {
 
 @Composable
 fun Body() {
+    Style(AppStylesheet)
     var issueList by remember {
         mutableStateOf(listOf<PerfIssue>())
     }
@@ -30,15 +34,19 @@ fun Body() {
         issueList = loadPerfIssues()
     }
     Ul(attrs = {
-
+        classes(AppStylesheet.issueUl)
     }, content = {
         issueList.map { perfIssue ->
             Li {
-                Text(perfIssue.title)
+                P(attrs = { classes(issueGroupText) }, content = {
+                    Text(perfIssue.title)
+                })
                 Ul(content = {
                     perfIssue.details.map { detail ->
                         Li {
-                            Text(detail.name)
+                            P(attrs = { classes(issueNameText) }, content = {
+                                Text(detail.name)
+                            })
                         }
                     }
                 })
