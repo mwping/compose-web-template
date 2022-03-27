@@ -1,7 +1,5 @@
 import org.jetbrains.compose.compose
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension
-import org.jetbrains.kotlin.ir.backend.js.compile
 
 plugins {
     kotlin("multiplatform")
@@ -28,8 +26,7 @@ kotlin {
                 implementation(compose.web.core)
                 implementation(compose.runtime)
                 implementation("io.ktor:ktor-client-core:1.6.8")
-//                implementation("io.ktor:ktor-client-cio:1.6.8")
-//                implementation("io.ktor:ktor-client-serialization:1.6.8")
+                implementation ("io.ktor:ktor-client-js:1.6.8")
             }
         }
     }
